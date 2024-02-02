@@ -1,0 +1,52 @@
+version: "3.3"
+
+services:
+  echangeo:
+    build: ./
+    depends_on:
+      - postgresql
+    container_name: echangeo-back
+    restart: always
+    ports:
+      - "8001:8000"
+    dns:
+      - 8.8.8.8
+    volumes:
+      - ./:/var/www/
+    command: "symfony server:start"
+    networks:
+      - rr-net
+
+  postgresql:
+    image: postgres:14
+    container_name: postgresql_echangeo 
+    restart: always
+    environment:
+      POSTGRES_DB: echangeo
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: test
+    ports:
+      - 5436:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
+    networks:
+      - rr-net
+
+  adminer:
+    image: adminer
+    container_name: adminer_echangeo
+    restart: always
+    ports:
+      - "8086:8080"
+    networks:
+      - rr-net
+    depends_on:
+      - postgresql
+
+networks:
+  rr-net:
+    driver: bridge
+
+volumes:
+  db-data:

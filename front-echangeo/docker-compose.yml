@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  image:
+    build:
+      dockerfile: "Dockerfile"
+      context: "."
+    volumes:
+      - .:/app # Assurez-vous que le chemin correspond à celui dans le Dockerfile
+    ports:
+      - 3000:3000

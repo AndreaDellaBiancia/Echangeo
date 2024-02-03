@@ -8,11 +8,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'app_main')]
+    #[Route('/api/', name: 'app_main')]
     public function index(): Response
     {
-        return $this->render('main/index.html.twig', [
+        $array = [
+            "name" => "Andrea",
+            "bar" => "foo",
+        ];
+        //Get the first 5 templates and store them in $homeTemplates 
+        
+        //We return an object that contains the 5 templates 
+        return $this->json($array, 200);
+
+        /* return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
-        ]);
+        ]); */
     }
 }

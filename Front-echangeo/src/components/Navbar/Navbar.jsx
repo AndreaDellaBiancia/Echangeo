@@ -113,16 +113,16 @@ function NavBar() {
   }
 
   // Si le composant LOGIN est affiché et on click dans la page (sauf sur la nav) le composant se ferme
-  const root = document.querySelector("#root");
+  /* const root = document.querySelector("#root");
 
-  const screen = root?.firstChild?.childNodes[1];
+  const screen = root?.firstChild?.childNodes[3];
 
   screen?.addEventListener("click", function () {
     if (isLoginOpen === true) {
       setIsLoginOpen(false);
     }
   });
-  
+ */
   const buttonMenuMobile = document.querySelector(".navbar-toggler");
 
   buttonMenuMobile?.addEventListener("click", function () {
@@ -130,17 +130,17 @@ function NavBar() {
       setIsLoginOpen(false);
     }
   });
- 
 
   // Si on click sur l'ecran sauf sur la nav, on fait disparaitre le ProfileOptionContainer
-  screen?.addEventListener("click", function () {
+  /* screen?.addEventListener("click", function () {
     if (classProfile === profileClassOpen || classProfile === "") {
       //Si on est en taille mobile on fait rien
       if (window.screen.width > 991) {
         setClassProfile(profileClassClose);
       }
     }
-  });
+  }); */
+
   function handleLogout() {
     const profileOptionHtml = document.querySelector(
       "#profile-container-option"
@@ -158,44 +158,40 @@ function NavBar() {
     navigate("/", { replace: true });
   }
 
-
-
   return (
-    <Navbar expand="lg" expanded={expanded}>
-      <Container className="m-0">
-        <Navbar.Brand href="#home">
-          <img
-            src={logo}
-            alt="Logo Echangeo"
-            onClick={() => changePage("/")}
-            className="brand-mobile"
-          />
-        </Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          onClick={() => setExpanded(!expanded)}
-        />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Link to="/" className="nav-item" onClick={closeMenu}>
-              Accueil
-            </Link>
-            <Link to="#" className="nav-item" onClick={closeMenu}>
-              Je demande un service
-            </Link>
-            <Navbar.Brand href="#home" className="brand-desktop">
-              <img
-                src={logo}
-                alt="Logo Echangeo"
-                onClick={() => changePage("/")}
-              />
-            </Navbar.Brand>
-            <Link to="#" className="nav-item" onClick={closeMenu}>
-              Je me propose !
-            </Link>
+    <>
+      {/*============================================================================================= */}
+      {/*===================================== NAVBAR VERSION MOBILE ================================= */}
+      {/*============================================================================================= */}
 
-            <ul className="navbar-nav d-flex align-items-center">
-              {/* {(roleUser === "ADMIN" || roleUser === "SUPER_ADMIN") && (
+      <Navbar expand="lg" expanded={expanded} className="nav-mobile">
+        <Container className="m-0">
+          <Navbar.Brand href="#home">
+            <img
+              src={logo}
+              alt="Logo Echangeo"
+              onClick={() => changePage("/")}
+              className="brand-mobile"
+            />
+          </Navbar.Brand>
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={() => setExpanded(!expanded)}
+          />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Link to="/" className="nav-item" onClick={closeMenu}>
+                Accueil
+              </Link>
+              <Link to="#" className="nav-item" onClick={closeMenu}>
+                Je demande un service
+              </Link>
+              <Link to="#" className="nav-item" onClick={closeMenu}>
+                Je me propose !
+              </Link>
+
+              <ul className="navbar-nav d-flex align-items-center">
+                {/* {(roleUser === "ADMIN" || roleUser === "SUPER_ADMIN") && (
                 <NavItem
                   className="nav-item"
                   style={{ display: "flex", flexDirection: "column" }}
@@ -212,39 +208,108 @@ function NavBar() {
                 </NavItem>
               )}
  */}
-              {!token ? (
-                <li
-                  className="nav-item"
-                  onMouseEnter={handleMouseEnterProfile}
-                  onMouseLeave={handleMouseLeaveProfile}
-                  onClick={handleLoginOpen}
-                >
-                 Connexion / inscription
-                </li>
-              ) : (
-                <li>
-                  <p
-                    style={{
-                      width: "100%",
-                      textAlign: "center",
-                      marginBottom: 0,
-                      textTransform: "uppercase",
-                      color: "blue",
-                      fontSize: "1.3rem",
-                    }}
+                {!token ? (
+                  <li
+                    className="nav-item"
+                    onMouseEnter={handleMouseEnterProfile}
+                    onMouseLeave={handleMouseLeaveProfile}
+                    onClick={handleLoginOpen}
                   >
-                    {user?.username}
-                  </p>
-                </li>
-              )}
-            </ul>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+                    Connexion / inscription
+                  </li>
+                ) : (
+                  <li>
+                    <p
+                      style={{
+                        width: "100%",
+                        textAlign: "center",
+                        marginBottom: 0,
+                        textTransform: "uppercase",
+                        color: "blue",
+                        fontSize: "1.3rem",
+                      }}
+                    >
+                      {user?.username}
+                    </p>
+                  </li>
+                )}
+              </ul>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+        {isLoginOpen && (
+          <LogIn setIsLoginOpen={setIsLoginOpen} isLoginOpen={isLoginOpen} />
+        )}
+      </Navbar>
+
+
+      {/*============================================================================================= */}
+      {/*===================================== NAVBAR VERSION DESKTOP ================================= */}
+      {/*============================================================================================= */}
+      <ul className="nav flex-column nav-desktop">
+        <li href="#home">
+          <img
+            src={logo}
+            alt="Logo Echangeo"
+            onClick={() => changePage("/")}
+            className="brand-desktop"
+          />
+        </li>
+        <li>
+          <i className="fa-solid fa-house" style={{ color: "#ff4f1f" }}></i>
+          <Link to="/" className="nav-item" onClick={closeMenu}>
+            Accueil
+          </Link>
+        </li>
+        <li>
+          <Link to="#" className="nav-item" onClick={closeMenu}>
+            <i
+              className="fa-solid fa-hand-holding-hand"
+              style={{ color: "#ff4f1f" }}
+            ></i>{" "}
+            Je demande un service
+          </Link>
+        </li>
+        <li>
+          <Link to="#" className="nav-item" onClick={closeMenu}>
+            <i
+              className="fa-solid fa-truck-fast"
+              style={{ color: "#ff4f1f" }}
+            ></i>{" "}
+            Je me propose !
+          </Link>
+        </li>
+      </ul>
+      {!token ? (
+        <div
+          className="signIn-ico"
+          style={{ color: "#ff4f1f" }}
+          onMouseEnter={handleMouseEnterProfile}
+          onMouseLeave={handleMouseLeaveProfile}
+          onClick={handleLoginOpen}
+        >
+          <i className="fa-solid fa-user"></i>connexion/inscription
+        </div>
+      ) : (
+        <div className="signIn-ico">
+          <p
+            style={{
+              width: "100%",
+              textAlign: "center",
+              marginBottom: 0,
+              textTransform: "uppercase",
+              color: "blue",
+              fontSize: "1.3rem",
+            }}
+          >
+            {user?.username}
+          </p>
+        </div>
+      )}
       {isLoginOpen && (
         <LogIn setIsLoginOpen={setIsLoginOpen} isLoginOpen={isLoginOpen} />
       )}
-    </Navbar>
+    </>
   );
 }
 

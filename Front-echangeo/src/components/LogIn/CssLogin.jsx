@@ -13,7 +13,7 @@ export const Container = styled.div`
   justify-content: center;
   padding: 1rem;
   box-shadow: 0 3px 5px black;
-  z-index: 99;
+  z-index: 999;
 `;
 
 export const FormLogin = styled.div`

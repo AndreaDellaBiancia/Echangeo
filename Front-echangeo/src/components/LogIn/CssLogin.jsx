@@ -2,26 +2,24 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   @media (min-width: 1251px) {
-    width: 300px;
   }
-  position: absolute;
-  right: 0px;
-  top: 100px;
   width: 100%;
   background-color: #f3f3f3;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 1rem;
   box-shadow: 0 3px 5px black;
-  z-index: 999;
 `;
 
 export const FormLogin = styled.div`
-  color: rgb(255, 81, 0);
+  color: red;
   font-weight: bold;
   width: 90%;
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
   label {
     width: 100%;
     text-align: center;

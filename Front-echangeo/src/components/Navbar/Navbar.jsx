@@ -6,8 +6,9 @@ import logo from "../../assets/images/navbar/logoEchangeo.png";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken, setUser } from "../../store/userReducer";
-import LogIn from "../LogIn/Login";
+import LoginModale from "../LogIn/LoginModale";
 import "./style.css";
+
 
 /* import { getUser } from "../../fetch/fetchUser";
  */
@@ -157,6 +158,15 @@ function NavBar() {
     // Redirection vers la page d'accueil
     navigate("/", { replace: true });
   }
+  const [modalRegisterShow, setModalRegisterShow] = useState(false);
+  function handleRegisterLink() {
+    // On affiche la modale avec le formulaire d'inscription
+    setModalRegisterShow(true);
+  }
+
+  /*  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true); */
 
   return (
     <>
@@ -209,12 +219,7 @@ function NavBar() {
               )}
  */}
                 {!token ? (
-                  <li
-                    className="nav-item"
-                    onMouseEnter={handleMouseEnterProfile}
-                    onMouseLeave={handleMouseLeaveProfile}
-                    onClick={handleLoginOpen}
-                  >
+                  <li className="nav-item" onClick={handleRegisterLink}>
                     Connexion / inscription
                   </li>
                 ) : (
@@ -237,11 +242,12 @@ function NavBar() {
             </Nav>
           </Navbar.Collapse>
         </Container>
-        {isLoginOpen && (
-          <LogIn setIsLoginOpen={setIsLoginOpen} isLoginOpen={isLoginOpen} />
-        )}
+        <LoginModale
+          show={modalRegisterShow}
+          setModalShow={setModalRegisterShow}
+          onHide={() => setModalRegisterShow(false)}
+        />
       </Navbar>
-
 
       {/*============================================================================================= */}
       {/*===================================== NAVBAR VERSION DESKTOP ================================= */}
@@ -284,9 +290,7 @@ function NavBar() {
         <div
           className="signIn-ico"
           style={{ color: "#ff4f1f" }}
-          onMouseEnter={handleMouseEnterProfile}
-          onMouseLeave={handleMouseLeaveProfile}
-          onClick={handleLoginOpen}
+          onClick={handleRegisterLink}
         >
           <i className="fa-solid fa-user"></i>connexion/inscription
         </div>
@@ -306,9 +310,11 @@ function NavBar() {
           </p>
         </div>
       )}
-      {isLoginOpen && (
-        <LogIn setIsLoginOpen={setIsLoginOpen} isLoginOpen={isLoginOpen} />
-      )}
+      <LoginModale
+        show={modalRegisterShow}
+        setModalShow={setModalRegisterShow}
+        onHide={() => setModalRegisterShow(false)}
+      />
     </>
   );
 }

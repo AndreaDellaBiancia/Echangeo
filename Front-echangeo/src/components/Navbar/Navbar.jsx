@@ -247,17 +247,17 @@ function NavBar() {
       {/*===================================== NAVBAR VERSION DESKTOP ================================= */}
       {/*============================================================================================= */}
       <ul className="nav flex-column nav-desktop">
-        <li href="#home">
+        <div href="#home" style={{marginBottom: "2rem"}}>
           <img
             src={logo}
             alt="Logo Echangeo"
             onClick={() => changePage("/")}
             className="brand-desktop"
           />
-        </li>
+        </div>
         <li>
-          <i className="fa-solid fa-house" style={{ color: "#ff4f1f" }}></i>
           <Link to="/" className="nav-item" onClick={closeMenu}>
+          <i className="fa-solid fa-house" style={{ color: "#ff4f1f" }}></i>
             Accueil
           </Link>
         </li>
@@ -288,7 +288,7 @@ function NavBar() {
           onMouseLeave={handleMouseLeaveProfile}
           onClick={handleLoginOpen}
         >
-          <i className="fa-solid fa-user"></i>connexion/inscription
+          <i className="fa-solid fa-user"></i>
         </div>
       ) : (
         <div className="signIn-ico">

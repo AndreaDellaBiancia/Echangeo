@@ -45,8 +45,7 @@
   }
   .nav-desktop{
     display: block;
-    width: 20%;
-    margin: 1rem 0 3rem 1rem;
+    margin: 1rem 10rem 3rem 1rem;
     position: absolute;
     
 
@@ -57,10 +56,11 @@
 
   .nav-desktop li{
     margin-bottom: 2rem ;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    width: 100%;
   }
   .nav-desktop i{
-    margin-right: 1rem;
+    margin-right: 0.5rem;
   }
   .nav-desktop  .nav-item{
     color: black;
@@ -68,11 +68,20 @@
   font-weight: 500;
 }
 
-  .nav-desktop  .nav-item:hover{
-    color: #ff4f1f;
-  text-decoration: underline;  
+.nav-desktop  li {
+  color: #ff4f1f;
+  padding: 0.5rem;
   
 }
+
+  .nav-desktop  li:hover{
+    color: #ff4f1f;
+    border-radius: 20px;
+    background-color: #ff501f38;
+    cursor: pointer;
+
+
+ }
 
 .signIn-ico{
   display: flex;
@@ -80,7 +89,7 @@
   align-items: center;
   position: absolute;
   top: 2rem;
-  right: 4.5rem;
+  right: 8.5rem;
   z-index: 99;
   cursor: pointer;
   font-weight: 500;
